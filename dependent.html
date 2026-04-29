@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="top-bar"><span>الوضع: غير مستقلة</span><span id="score">النقاط: 0</span></div>
+    <div class="float-btn" id="btn-badges" onclick="alert('الأوسمة: ' + (localStorage.getItem('my_badges') || 'لا يوجد'))">🏅</div>
+    
+    <div class="glass-box">
+        <p style="font-weight:bold; font-size:12px;">المهمة: سحب كرت أحمر (A) ثم أسود (B) بدون إرجاع</p>
+        <div class="chart-area">
+            <div class="bar" id="barA" style="background:var(--card-red);"><span class="bar-label">أحمر (A)<br><span id="vA">26/52</span></span></div>
+            <div class="bar" id="barB" style="background:var(--ink);"><span class="bar-label">أسود (B)<br><span id="vB">26/52</span></span></div>
+        </div>
+        <div id="res" class="card-slot">?</div>
+        <div class="deck-btn" onclick="draw()"></div>
+        <a href="index.html" class="btn-nav">عودة</a>
+    </div>
+
+    <script>
+        let total = 52, red = 26, black = 26, score = 0;
+        function draw() {
+            if(total <= 1) return;
+            let isRed = Math.random() < (red/total);
+            if(isRed) { red--; document.getElementById('res').innerText="♥"; document.getElementById('res').style.color="red"; }
+            else { black--; document.getElementById('res').innerText="♠"; document.getElementById('res').style.color="black"; }
+            total--; score += 10;
+            document.getElementById('score').innerText = "النقاط: " + score;
+            document.getElementById('vA').innerText = red+"/"+total;
+            document.getElementById('vB').innerText = black+"/"+total;
+            document.getElementById('barA').style.height = (red/total*100) + "%";
+            document.getElementById('barB').style.height = (black/total*100) + "%";
+            
+            if(total < 50) {
+                let b = JSON.parse(localStorage.getItem('my_badges') || '[]');
+                if(!b.includes("مستكشف")) { b.push("مستكشف"); localStorage.setItem('my_badges', JSON.stringify(b)); alert("🎉 حصلتِ على وسام مستكشف! تم فتح التحدي."); }
+            }
+        }
+    </script>
+</body>
+</html>
+
