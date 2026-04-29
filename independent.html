@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="top-bar"><span>الوضع: مستقلة</span><span id="score">النقاط: 0</span></div>
+    <div class="glass-box">
+        <p style="font-weight:bold; font-size:12px;">المهمة: سحب مع الإرجاع (المقام ثابت)</p>
+        <div class="chart-area">
+            <div class="bar" style="height:50%; background:var(--card-red);"><span class="bar-label">أحمر (A)<br>26/52</span></div>
+            <div class="bar" style="height:50%; background:var(--ink);"><span class="bar-label">أسود (B)<br>26/52</span></div>
+        </div>
+        <div id="res" class="card-slot">?</div>
+        <div class="deck-btn" onclick="document.getElementById('res').innerText = Math.random()>0.5?'♥':'♠'"></div>
+        <a href="index.html" class="btn-nav">عودة</a>
+    </div>
+</body>
+</html>
+
