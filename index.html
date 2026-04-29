@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>PROBCARD - القائمة الرئيسية</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="glass-box">
+        <h1 style="color:var(--card-red); font-size:45px; margin:0;">PROBCARD</h1>
+        <p style="font-weight:bold;">إعداد: فرح، ريم، تالين، عريب، جيان</p>
+        <p style="font-size:12px;">بإشراف المعلمة: زهرة الشمراني</p>
+        
+        <a href="independent.html" class="btn-nav">الحوادث المستقلة</a>
+        <a href="dependent.html" class="btn-nav">الحوادث غير المستقلة</a>
+        
+        <button id="lock-btn" class="btn-nav" style="background:#555;" onclick="checkChallenge()">🔒 وضع التحدي (مغلق)</button>
+    </div>
+
+    <script>
+        function checkChallenge() {
+            let badges = JSON.parse(localStorage.getItem('my_badges') || '[]');
+            if (badges.includes("مستكشف")) {
+                window.location.href = 'challenge.html';
+            } else {
+                alert("🔒 يجب عليكِ إنهاء وضع الحوادث غير المستقلة أولاً لفتح التحدي!");
+            }
+        }
+
+        window.onload = function() {
+            let badges = JSON.parse(localStorage.getItem('my_badges') || '[]');
+            if (badges.includes("مستكشف")) {
+                let btn = document.getElementById('lock-btn');
+                btn.style.background = "var(--gold)";
+                btn.style.color = "var(--ink)";
+                btn.innerText = "🏆 دخول التحدي (مفتوح)";
+            }
+        }
+    </script>
+</body>
+</html>
