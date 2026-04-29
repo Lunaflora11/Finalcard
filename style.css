@@ -1,0 +1,24 @@
+:root { 
+    --ink: #1a1a1a; --paper: #f4f1e6; 
+    --desk: #829494; --card-red: #ab3c43; --gold: #f1c40f; 
+}
+* { box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+body { background: var(--desk); margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+
+.glass-box { background: var(--paper); border: 5px solid var(--ink); padding: 25px; text-align: center; width: 90%; max-width: 400px; box-shadow: 10px 10px 0px rgba(0,0,0,0.1); position: relative; z-index: 5; }
+
+.top-bar { position: fixed; top: 0; width: 100%; background: var(--ink); color: white; padding: 12px; display: flex; justify-content: space-around; font-size: 14px; z-index: 100; }
+
+.chart-area { display: flex; justify-content: space-around; align-items: flex-end; height: 100px; border-bottom: 3px solid var(--ink); margin: 20px 0; background: white; padding: 10px; border-radius: 4px; }
+.bar { width: 45px; border: 2px solid var(--ink); border-bottom: none; transition: height 0.4s ease; position: relative; }
+.bar-label { position: absolute; bottom: -35px; font-size: 9px; width: 60px; left: -8px; font-weight: bold; line-height: 1.2; }
+
+.card-slot { width: 70px; height: 100px; border: 2px solid var(--ink); border-radius: 8px; margin: 10px auto; display: flex; align-items: center; justify-content: center; font-size: 40px; background: white; }
+.deck-btn { width: 90px; height: 130px; background: var(--card-red) url('https://i.pinimg.com/originals/81/44/7e/81447e704040a4d805096f264870f07f.png') center/cover; border: 3px solid var(--ink); border-radius: 10px; margin: 15px auto; cursor: pointer; box-shadow: 5px 5px 0px var(--ink); }
+
+.float-btn { position: fixed; bottom: 20px; width: 50px; height: 50px; border-radius: 50%; border: 3px solid var(--ink); display: flex; align-items: center; justify-content: center; cursor: pointer; background: var(--paper); font-size: 20px; z-index: 200; }
+#btn-badges { left: 20px; }
+#btn-guide { right: 20px; }
+
+.btn-nav { background: var(--ink); color: white; border: none; padding: 12px; cursor: pointer; border-radius: 5px; width: 100%; margin-top: 10px; font-size: 16px; font-weight: bold; text-decoration: none; display: block; }
+
