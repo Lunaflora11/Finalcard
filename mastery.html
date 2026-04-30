@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glass-box">
+        <h3>🎯 سؤال الإتقان</h3>
+        <p>ما هو احتمال سحب كرت أحمر من 52 كرت؟</p>
+        <button class="btn-nav" onclick="end(true)">26/52</button>
+        <button class="btn-nav" onclick="end(false)">1/52</button>
+    </div>
+    <script>
+        function end(correct) {
+            if(correct) alert('ممتاز! تم إنهاء المسار بنجاح');
+            location.href = 'modes.html';
+        }
+    </script>
+</body>
+</html>
