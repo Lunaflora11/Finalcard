@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="top-bar"><span id="score">النقاط: 0</span></div>
+    <div class="glass-box">
+        <h2>الأوضاع</h2>
+        <a href="intro.html?m=indep" class="btn-nav">مستقلة</a>
+        <a href="intro.html?m=dep" class="btn-nav">غير مستقلة</a>
+        <a href="intro.html?m=mut" class="btn-nav">متنافية</a>
+        <button id="lock" class="btn-nav" style="background:#444;" onclick="check()">🔒 التحدي</button>
+    </div>
+    <div class="float-btn" style="left:20px;" onclick="alert('الأوسمة: '+(localStorage.getItem('badge')||'لا يوجد'))">🏆</div>
+    <div class="float-btn" style="right:20px;" onclick="location.href='guide.html'">؟</div>
+    <script>
+        function check() { if(localStorage.getItem('badge')) location.href='challenge.html'; else alert('أنهِ الوضع غير المستقل أولاً!'); }
+    </script>
+</body>
+</html>
+
