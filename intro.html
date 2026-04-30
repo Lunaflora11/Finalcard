@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glass-box">
+        <h3>❓ سؤال تمهيدي</h3>
+        <p id="q">هل يتغير المقام في الحوادث غير المستقلة؟</p>
+        <button class="btn-nav" onclick="go(true)">نعم</button>
+        <button class="btn-nav" onclick="go(false)">لا</button>
+    </div>
+    <script>
+        function go(ans) {
+            const m = new URLSearchParams(window.location.search).get('m');
+            if(ans && m==='dep') alert('إجابة صحيحة! +10 نقاط');
+            location.href = m === 'dep' ? 'dependent.html' : 'independent.html';
+        }
+    </script>
+</body>
+</html>
+
