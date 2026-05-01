@@ -1,35 +1,136 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8"><link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الحوادث غير المستقلة - Probcard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
+    <style>
+        .mission-box { 
+            background: white; 
+            border: 3px solid var(--card-red); 
+            padding: 15px; 
+            margin: 10px auto; 
+            border-radius: 12px; 
+            font-weight: bold; 
+            font-size: 16px;
+            width: 90%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .card-slot { 
+            width: 100px; 
+            height: 140px; 
+            border: 3px solid var(--ink); 
+            border-radius: 12px; 
+            margin: 20px auto; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            background: white; 
+            font-size: 45px; 
+            position: relative; 
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1); 
+        }
+        .card-num { 
+            position: absolute; 
+            top: 8px; 
+            right: 12px; 
+            font-size: 20px; 
+            font-weight: bold; 
+        }
+        .card-num-flip {
+            position: absolute; 
+            bottom: 8px; 
+            left: 12px; 
+            font-size: 20px; 
+            font-weight: bold; 
+            transform: rotate(180deg);
+        }
+    </style>
 </head>
 <body>
-    <div class="top-bar"><span>الوضع: غير مستقلة</span><span id="vTotal">المقام: 52</span></div>
-    <div class="glass-box">
-        <div class="chart-area">
-            <div class="bar" id="barA" style="background:red;"><span class="bar-label">أحمر<br><span id="vA">26/52</span></span></div>
-            <div class="bar" id="barB" style="background:black;"><span class="bar-label">أسود<br><span id="vB">26/52</span></span></div>
-        </div>
-        <div id="card" class="card-slot">?</div>
-        <div class="deck-btn" onclick="draw()"></div>
-        <a href="mastery.html" class="btn-nav" style="background:green;">سؤال الإتقان ➔</a>
+    <div class="top-bar">
+        <span>الوضع: غير مستقلة</span>
+        <span id="vTotal">المقام: 52</span>
     </div>
+
+    <div class="glass-box">
+        <div class="mission-box" id="mission-desc">
+            الحادثة: سحب كرت أحمر ثم كرت أسود (بدون إرجاع)
+        </div>
+
+        <div class="chart-area">
+            <div class="bar" id="barA" style="background:var(--card-red); height:50%;">
+                <span class="bar-label">أحمر (A)<br><span id="vA">26/52</span></span>
+            </div>
+            <div class="bar" id="barB" style="background:var(--ink); height:50%;">
+                <span class="bar-label">أسود (B)<br><span id="vB">26/52</span></span>
+            </div>
+        </div>
+
+        <div id="card" class="card-slot">
+            <span id="card-n-top" class="card-num"></span>
+            <span id="card-icon">?</span>
+            <span id="card-n-bottom" class="card-num-flip"></span>
+        </div>
+
+        <div class="deck-btn" onclick="draw()"></div>
+
+        <a href="mastery.html" class="btn-nav" style="background: #27ae60; margin-top: 20px;">سؤال الإتقان ➔</a>
+    </div>
+
     <script>
-        let t=52, r=26, b=26;
+        let total = 52, red = 26, black = 26;
+        const icons = { red: ['♥', '♦'], black: ['♠', '♣'] };
+        const nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+
         function draw() {
-            if(t<=1) return;
-            let isRed = Math.random() < (r/t);
-            if(isRed) { r--; document.getElementById('card').innerText="♥"; document.getElementById('card').style.color="red"; }
-            else { b--; document.getElementById('card').innerText="♠"; document.getElementById('card').style.color="black"; }
-            t--;
-            document.getElementById('vTotal').innerText = "المقام: " + t;
-            document.getElementById('vA').innerText = r+"/"+t;
-            document.getElementById('vB').innerText = b+"/"+t;
-            document.getElementById('barA').style.height = (r/t*100)+"%";
-            document.getElementById('barB').style.height = (b/t*100)+"%";
-            if(t===50) { localStorage.setItem('badge', 'مستكشف'); alert('🎉 حصلت على وسام مستكشف!'); }
+            if (total <= 1) {
+                alert("انتهت الرزمة! سيتم إعادة توزيع الكروت.");
+                location.reload();
+                return;
+            }
+
+            // تحديد اللون بناءً على الاحتمال الحالي
+            let isRed = Math.random() < (red / total);
+            let selectedIcon, selectedNum;
+
+            selectedNum = nums[Math.floor(Math.random() * nums.length)];
+
+            if (isRed && red > 0) {
+                red--;
+                selectedIcon = icons.red[Math.floor(Math.random() * icons.red.length)];
+                document.getElementById('card').style.color = "var(--card-red)";
+            } else {
+                black--;
+                selectedIcon = icons.black[Math.floor(Math.random() * icons.black.length)];
+                document.getElementById('card').style.color = "var(--ink)";
+            }
+
+            total--;
+
+            // تحديث واجهة المستخدم
+            document.getElementById('card-n-top').innerText = selectedNum;
+            document.getElementById('card-n-bottom').innerText = selectedNum;
+            document.getElementById('card-icon').innerText = selectedIcon;
+            
+            document.getElementById('vTotal').innerText = "المقام: " + total;
+            document.getElementById('vA').innerText = red + "/" + total;
+            document.getElementById('vB').innerText = black + "/" + total;
+
+            // تحديث الرسم البياني
+            document.getElementById('barA').style.height = (red / total * 100) + "%";
+            document.getElementById('barB').style.height = (black / total * 100) + "%";
+
+            // حفظ الوسام لفتح التحدي
+            let b = JSON.parse(localStorage.getItem('my_badges') || '[]');
+            if (!b.includes("مستكشف")) {
+                b.push("مستكشف");
+                localStorage.setItem('my_badges', JSON.stringify(b));
+            }
         }
     </script>
 </body>
 </html>
-
