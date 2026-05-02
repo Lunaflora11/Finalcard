@@ -10,7 +10,7 @@
         <a href="intro.html?m=indep" class="btn-nav">مستقلة</a>
         <a href="intro.html?m=dep" class="btn-nav">غير مستقلة</a>
         <a href="intro.html?m=mut" class="btn-nav">متنافية</a>
-        <button id="lock" class="btn-nav" style="background:#444;" onclick="check()">🔒 التحدي</button>
+        <button id="lock" class="btn-nav">🔒 التحدي</button>
     </div>
     <script>
         function check() { if(localStorage.getItem('badge')) location.href='challenge.html'; else alert('أنهِ الوضع غير المستقل أولاً!'); }
@@ -22,6 +22,27 @@
 </div>
 
 <script>
+    function checkChallenge() {
+        let badges = JSON.parse(localStorage.getItem('my_badges') || '[]');
+        if (badges.includes('explorer')) {
+            window.location.href = 'challenge.html';
+        } else {
+            alert("🔒 التحدي مقفل! يجب عليكِ أولاً إنهاء وضع 'الحوادث غير المستقلة' والحصول على وسام المستكشف.");
+        }
+    }
+
+    // لتغيير شكل الزر فور فتح الصفحة إذا كان الشرط متحققاً
+    window.onload = function() {
+        let badges = JSON.parse(localStorage.getItem('my_badges') || '[]');
+        if (badges.includes('explorer')) {
+            let btn = document.getElementById('lock'); // تأكدي أن id الزر هو lock
+            if(btn) {
+                btn.style.background = "var(--gold)";
+                btn.style.color = "var(--ink)";
+                btn.innerText = "🏆 دخول التحدي (مفتوح)";
+            }
+        }
+    }
 function resetAllProgress() {
     if(confirm("هل أنت متأكد؟ سيتم حذف جميع الأوسمة والنقاط والعودة للرئيسية.")) {
         localStorage.clear(); // يحذف كل التقدم (الأوسمة والنقاط)
