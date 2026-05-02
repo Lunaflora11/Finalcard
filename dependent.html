@@ -131,6 +131,10 @@
                 localStorage.setItem('my_badges', JSON.stringify(b));
             }
         }
+        let b = JSON.parse(localStorage.getItem('my_badges') || '[]');
+if(!b.includes('explorer')) b.push('explorer'); // وسام المستكشف
+localStorage.setItem('my_badges', JSON.stringify(b));
+        
     </script>
     <div class="settings-bar">
     <div class="settings-btn" onclick="location.href='guide.html'" title="الدليل">📖</div>
