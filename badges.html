@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="glass-box" style="max-width: 450px;">
+        <h2 style="color:var(--card-red);">خزانة الأوسمة</h2>
+        
+        <div class="badges-grid">
+            <div class="badge-item" id="badge-explorer">
+                <div class="badge-icon">🔍</div>
+                <p class="badge-desc">المستكشف<br><small>أنهِ الوضع التعليمي الأول</small></p>
+            </div>
+
+            <div class="badge-item" id="badge-expert">
+                <div class="badge-icon">🎓</div>
+                <p class="badge-desc">الخبير<br><small>أنهِ جميع الأوضاع التعليمية</small></p>
+            </div>
+
+            <div class="badge-item" id="badge-pro">
+                <div class="badge-icon">⚡</div>
+                <p class="badge-desc">المحترف<br><small>اجمع 100 نقطة في التحدي</small></p>
+            </div>
+        </div>
+
+        <button class="btn-nav" onclick="history.back()">العودة</button>
+    </div>
+
+    <script>
+        // دالة للتحقق من الأوسمة المفتوحة وتفعيلها
+        window.onload = function() {
+            let myBadges = JSON.parse(localStorage.getItem('my_badges') || '[]');
+            
+            if(myBadges.includes('explorer')) document.getElementById('badge-explorer').classList.add('unlocked');
+            if(myBadges.includes('expert')) document.getElementById('badge-expert').classList.add('unlocked');
+            if(myBadges.includes('pro')) document.getElementById('badge-pro').classList.add('unlocked');
+        }
+    </script>
+</body>
+</html>
