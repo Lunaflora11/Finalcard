@@ -61,6 +61,12 @@
             });
         }
         startQuiz();
+        if(score >= 100) {
+    let b = JSON.parse(localStorage.getItem('my_badges') || '[]');
+    if(!b.includes('pro')) b.push('pro'); // وسام المحترف
+    localStorage.setItem('my_badges', JSON.stringify(b));
+        }
+    
     </script>
 </body>
 </html>
