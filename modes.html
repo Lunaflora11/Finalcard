@@ -12,8 +12,6 @@
         <a href="intro.html?m=mut" class="btn-nav">متنافية</a>
         <button id="lock" class="btn-nav" style="background:#444;" onclick="check()">🔒 التحدي</button>
     </div>
-    <div class="float-btn" style="left:20px;" onclick="alert('الأوسمة: '+(localStorage.getItem('badge')||'لا يوجد'))">🏆</div>
-    <div class="float-btn" style="right:20px;" onclick="location.href='guide.html'">؟</div>
     <script>
         function check() { if(localStorage.getItem('badge')) location.href='challenge.html'; else alert('أنهِ الوضع غير المستقل أولاً!'); }
     </script>
