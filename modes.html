@@ -17,6 +17,21 @@
     <script>
         function check() { if(localStorage.getItem('badge')) location.href='challenge.html'; else alert('أنهِ الوضع غير المستقل أولاً!'); }
     </script>
+    <div class="settings-bar">
+    <div class="settings-btn" onclick="location.href='badges.html'" title="الأوسمة">🏆</div>
+    <div class="settings-btn" onclick="location.href='guide.html'" title="الدليل">📖</div>
+    <div class="settings-btn exit-btn" onclick="resetAllProgress()">⚠️</div>
+</div>
+
+<script>
+function resetAllProgress() {
+    if(confirm("هل أنت متأكد؟ سيتم حذف جميع الأوسمة والنقاط والعودة للرئيسية.")) {
+        localStorage.clear(); // يحذف كل التقدم (الأوسمة والنقاط)
+        location.href = 'index.html';
+    }
+}
+</script>
+    
 </body>
 </html>
 
