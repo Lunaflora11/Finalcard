@@ -48,3 +48,35 @@ body { background: var(--desk); margin: 0; display: flex; align-items: center; j
     border: 2px solid var(--ink);
     margin: 15px 0;
 }
+.badges-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+.badge-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 11px;
+    opacity: 0.3; /* باهت افتراضياً */
+    filter: grayscale(100%);
+    transition: 0.5s;
+}
+.badge-item.unlocked {
+    opacity: 1; /* يظهر بوضوح عند فتحه */
+    filter: grayscale(0%);
+}
+.badge-icon {
+    font-size: 40px;
+    margin-bottom: 5px;
+    background: white;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid var(--ink);
+}
+.badge-desc { font-weight: bold; line-height: 1.2; color: #333; }
