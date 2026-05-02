@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الحوادث المستقلة - Probcard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
+    <style>
+        .mission-box { 
+            background: white; 
+            border: 3px solid #2980b9; 
+            padding: 15px; 
+            margin: 10px auto; 
+            border-radius: 12px; 
+            font-weight: bold; 
+            font-size: 16px;
+            width: 90%;
+        }
+        .card-slot { 
+            width: 100px; height: 140px; 
+            border: 3px solid var(--ink); border-radius: 12px; 
+            margin: 20px auto; display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; 
+            background: white; font-size: 45px; position: relative; 
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1); 
+        }
+        .card-num { position: absolute; top: 8px; right: 12px; font-size: 20px; font-weight: bold; }
+        .card-num-flip { position: absolute; bottom: 8px; left: 12px; font-size: 20px; font-weight: bold; transform: rotate(180deg); }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <span>الوضع: مستقلة (مع الإرجاع)</span>
+        <span>المقام ثابت: 52</span>
+    </div>
+
+    <div class="glass-box">
+        <div class="mission-box">
+            الحادثة: سحب كرت ثم إرجاعه (المقام لا يتغير)
+        </div>
+
+        <div class="chart-area">
+            <div class="bar" style="background:var(--card-red); height:50%;">
+                <span class="bar-label">أحمر (A)<br>26/52</span>
+            </div>
+            <div class="bar" style="background:var(--ink); height:50%;">
+                <span class="bar-label">أسود (B)<br>26/52</span>
+            </div>
+        </div>
+
+        <div id="card" class="card-slot">
+            <span id="card-n-top" class="card-num"></span>
+            <span id="card-icon">?</span>
+            <span id="card-n-bottom" class="card-num-flip"></span>
+        </div>
+
+        <div class="deck-btn" onclick="drawIndependent()"></div>
+
+        <a href="mastery.html" class="btn-nav" style="background: #27ae60;">سؤال الإتقان ➔</a>
+    </div>
+
+    <div class="settings-bar">
+        <div class="settings-btn" onclick="location.href='badges.html'">🏆</div>
+        <div class="settings-btn" onclick="location.href='guide.html'">📖</div>
+        <div class="settings-btn exit-btn" onclick="resetProgress()">⚠️</div>
+    </div>
+
+    <script>
+        const icons = { red: ['♥', '♦'], black: ['♠', '♣'] };
+        const nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+
+        function drawIndependent() {
+            let isRed = Math.random() < 0.5;
+            let selectedNum = nums[Math.floor(Math.random() * nums.length)];
+            let selectedIcon;
+
+            if (isRed) {
+                selectedIcon = icons.red[Math.floor(Math.random() * 2)];
+                document.getElementById('card').style.color = "var(--card-red)";
+            } else {
+                selectedIcon = icons.black[Math.floor(Math.random() * 2)];
+                document.getElementById('card').style.color = "var(--ink)";
+            }
+
+            document.getElementById('card-n-top').innerText = selectedNum;
+            document.getElementById('card-n-bottom').innerText = selectedNum;
+            document.getElementById('card-icon').innerText = selectedIcon;
+        }
+
+        function resetProgress() {
+            if(confirm("هل تريد العودة للرئيسية وحذف التقدم؟")) {
+                localStorage.clear();
+                location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>
